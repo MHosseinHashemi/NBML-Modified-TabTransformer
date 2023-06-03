@@ -8,7 +8,7 @@ setup(
   description = 'Tab Transformer - Pytorch',
   author = 'Phil Wang',
   author_email = 'lucidrains@gmail.com',
-  url = 'https://github.com/lucidrains/tab-transformer-pytorch',
+  url = 'https://github.com/MHosseinHashemi/tab-transformer-pytorch',
   keywords = [
     'artificial intelligence',
     'transformers',
