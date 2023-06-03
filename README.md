@@ -1,8 +1,10 @@
-<p align="center"><img src="./tab.png" width="300px"></img></p>
+## Attention !!
+This is a bit modified version of Tab Transformer, Checkout the "lucidrains/tab-transformer-pytorch" for the original one. 
 
 ## Tab Transformer
 
 Implementation of <a href="https://arxiv.org/abs/2012.06678">Tab Transformer</a>, attention network for tabular data, in Pytorch. This simple architecture came within a hair's breadth of GBDT's performance.
+<p align="center"><img src="./tab.png" width="300px"></img></p>
 
 ## Install
 
@@ -39,38 +41,13 @@ x_cont = torch.randn(1, 10)               # assume continuous values are already
 pred = model(x_categ, x_cont) # (1, 1)
 ```
 
-## FT Transformer
-
-<img src="./tab-vs-ft.png" width="500px"></img>
-
-<a href="https://arxiv.org/abs/2106.11959v2">This paper</a> from Yandex improves on Tab Transformer by using a simpler scheme for embedding the continuous numerical values as shown in the diagram above, courtesy of <a href="https://www.reddit.com/r/MachineLearning/comments/yhdqlj/project_improving_deep_learning_for_tabular_data/">this reddit post</a>.
-
-Included in this repository just for convenient comparison to Tab Transformer
-
-```python
-import torch
-from tab_transformer_pytorch import FTTransformer
-
-model = FTTransformer(
-    categories = (10, 5, 6, 5, 8),      # tuple containing the number of unique values within each category
-    num_continuous = 10,                # number of continuous values
-    dim = 32,                           # dimension, paper set at 32
-    dim_out = 1,                        # binary prediction, but could be anything
-    depth = 6,                          # depth, paper recommended 6
-    heads = 8,                          # heads, paper recommends 8
-    attn_dropout = 0.1,                 # post-attention dropout
-    ff_dropout = 0.1                    # feed forward dropout
-)
-
-x_categ = torch.randint(0, 5, (1, 5))     # category values, from 0 - max number of categories, in the order as passed into the constructor above
-x_numer = torch.randn(1, 10)              # numerical value
-
-pred = model(x_categ, x_numer) # (1, 1)
-```
-
-## Unsupervised Training
-
-To undergo the type of unsupervised training described in the paper, you can first convert your categories tokens to the appropriate unique ids, and then use <a href="https://github.com/lucidrains/electra-pytorch">Electra</a> on `model.transformer`.
+## Modifications:
+- Removed categories Tuple
+- Removed categorical features from forward() from TabTransformer Class.
+- Removed categorical tokens
+- Removed Categorical Constraints
+- Removed  Mean-STD Normalization
+- Changed the Activation Function from ReLU to Sigmoid (Our task is binary classification)
 
 ## Todo
 
