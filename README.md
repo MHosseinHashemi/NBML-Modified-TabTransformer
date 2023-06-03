@@ -2,7 +2,7 @@
 This is a bit modified version of Tab Transformer, Checkout the "lucidrains/tab-transformer-pytorch" for the original one. 
 
 ## Tab Transformer
-
+ 
 Implementation of <a href="https://arxiv.org/abs/2012.06678">Tab Transformer</a>, attention network for tabular data, in Pytorch. This simple architecture came within a hair's breadth of GBDT's performance.
 <p align="center"><img src="./tab.png" width="300px"></img></p>
 
