@@ -1,4 +1,4 @@
-<p align="center"><img src="./tab.png" width="400px"></img></p>
+<p align="center"><img src="./tab.png" width="300px"></img></p>
 
 ## Tab Transformer
 
