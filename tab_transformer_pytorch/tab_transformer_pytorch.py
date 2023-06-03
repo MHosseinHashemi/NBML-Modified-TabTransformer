@@ -150,7 +150,7 @@ class TabTransformer(nn.Module):
         dim_out = 1,
         mlp_hidden_mults = (4, 2),
         mlp_act = None,
-        num_special_tokens = 2,
+#         num_special_tokens = 2,
         continuous_mean_std = None,
         attn_dropout = 0.,
         ff_dropout = 0.
@@ -211,18 +211,19 @@ class TabTransformer(nn.Module):
 
         self.mlp = MLP(all_dimensions, act = mlp_act)
 
-    def forward(self, x_categ, x_cont, return_attn = False):
+#     def forward(self, x_categ, x_cont, return_attn = False):
+    def forward(self, x_cont, return_attn = False):
         xs = []
 
         # assert x_categ.shape[-1] == self.num_categories, f'you must pass in {self.num_categories} values for your categories input'
 
-        if self.num_unique_categories > 0:
-            x_categ += self.categories_offset
+#         if self.num_unique_categories > 0:
+#             x_categ += self.categories_offset
 
-            x, attns = self.transformer(x_categ, return_attn = True)
+#             x, attns = self.transformer(x_categ, return_attn = True)
 
-            flat_categ = x.flatten(1)
-            xs.append(flat_categ)
+#             flat_categ = x.flatten(1)
+#             xs.append(flat_categ)
 
         assert x_cont.shape[1] == self.num_continuous, f'you must pass in {self.num_continuous} values for your continuous input'
 
