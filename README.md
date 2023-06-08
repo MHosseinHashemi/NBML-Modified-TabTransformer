@@ -1,15 +1,23 @@
 ## Attention !!
-This is a bit modified version of Tab Transformer, Checkout the "lucidrains/tab-transformer-pytorch" for the original one. 
+This is a bit modified version of Tab Transformer, Checkout the "lucidrains/tab-transformer-pytorch" for the original one. This version utilizes the transformer calculation capacity even in the abscence of the categorical features.
 
-## Tab Transformer 
+## The Original Tab Transformer 
  
 Implementation of <a href="https://arxiv.org/abs/2012.06678">Tab Transformer</a>, attention network for tabular data, in Pytorch. This simple architecture came within a hair's breadth of GBDT's performance.
 <p align="center"><img src="./tab.png" width="300px"></img></p>
 
 ## Install
 
+- First clone this repository in your local machine using git clone commmand and make sure that the original package (lucidrains) is not currently installed on your local system.
+
 ```bash
-$ pip install tab-transformer-pytorch
+$ pip uninstall tab-transformer-pytorch
+```
+
+- Navigate to the setup.py file directory and run the following command:
+
+```bash
+$ python setup.py install
 ```
 
 ## Usage
@@ -19,26 +27,23 @@ import torch
 import torch.nn as nn
 from tab_transformer_pytorch import TabTransformer
 
-cont_mean_std = torch.randn(10, 2)
 
 model = TabTransformer(
-    categories = (10, 5, 6, 5, 8),      # tuple containing the number of unique values within each category
-    num_continuous = 10,                # number of continuous values
-    dim = 32,                           # dimension, paper set at 32
-    dim_out = 1,                        # binary prediction, but could be anything
-    depth = 6,                          # depth, paper recommended 6
-    heads = 8,                          # heads, paper recommends 8
-    attn_dropout = 0.1,                 # post-attention dropout
-    ff_dropout = 0.1,                   # feed forward dropout
-    mlp_hidden_mults = (4, 2),          # relative multiples of each hidden dimension of the last mlp to logits
-    mlp_act = nn.ReLU(),                # activation for final mlp, defaults to relu, but could be anything else (selu etc)
-    continuous_mean_std = cont_mean_std # (optional) - normalize the continuous values before layer norm
+    num_continuous=1000,                 # Number of continuous features (excluding the label column)
+    dim=32,                              # Dimension, you can modify it as per your needs
+    dim_out=1,                           # Number of output dimensions (e.g., for binary prediction)
+    depth=6,                             # Depth, adjust it based on your dataset complexity
+    heads=8,                             # Number of attention heads
+    attn_dropout=0.1,                    # Post-attention dropout
+    ff_dropout=0.1,                      # Feed-forward dropout
+    mlp_hidden_mults=(4, 2),             # Relative multiples of each hidden dimension of the last MLP to logits
+    mlp_act=None,                        # Activation for the final MLP (You can manually add your own activation function directly to the output)
 )
 
-x_categ = torch.randint(0, 5, (1, 5))     # category values, from 0 - max number of categories, in the order as passed into the constructor above
-x_cont = torch.randn(1, 10)               # assume continuous values are already normalized individually
+# assuming that your x_cont is a pandas dataframe
+x_cont = torch.tensor(x_cont.values, dtype=torch."your DataType")
 
-pred = model(x_categ, x_cont) # (1, 1)
+pred = model(x_cont) 
 ```
 
 ## Modifications:
