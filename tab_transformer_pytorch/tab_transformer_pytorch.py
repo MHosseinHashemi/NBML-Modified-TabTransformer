@@ -236,7 +236,10 @@ class TabTransformer(nn.Module):
             xs.append(normed_cont)
 
         x = torch.cat(xs, dim = -1)
-        logits =self.mlp(x)
+        # Pass the continous features to the transformer before feeding into mlp
+        x_transformer = self.transformer(x)
+        
+        logits =self.mlp(x_transformer)
 
         if not return_attn:
             return logits
