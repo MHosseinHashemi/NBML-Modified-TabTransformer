@@ -199,10 +199,15 @@ class TabTransformer(nn.Module):
             xs.append(normed_cont)
 
         x = torch.cat(xs, dim = -1)
-        # Pass the continous features to the transformer before feeding into mlp
-        x_transformer = self.transformer(x)
+        # To prevent error!
+        x = x.to(self.mlp[0].weight.device)
         
-        logits =self.mlp(x_transformer)
+        # Convert float32 data to int64 for embedding
+        if x.dtype == torch.float32:
+            x = x.to(torch.int64)  # Convert float32 to int64
+
+        x_transformer = self.transformer(x)
+        logits = self.mlp(x_transformer
 
         if not return_attn:
             return logits
