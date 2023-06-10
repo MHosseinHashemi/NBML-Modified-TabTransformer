@@ -207,7 +207,7 @@ class TabTransformer(nn.Module):
             x = x.to(torch.int64)  # Convert float32 to int64
 
         x_transformer = self.transformer(x)
-        logits = self.mlp(x_transformer
+        logits = self.mlp(x_transformer)
 
         if not return_attn:
             return logits
