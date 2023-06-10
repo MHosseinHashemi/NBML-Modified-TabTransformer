@@ -200,7 +200,7 @@ class TabTransformer(nn.Module):
 
         x = torch.cat(xs, dim = -1)
         # To prevent error!
-        x = x.to(self.mlp[0].weight.device)
+#         x = x.to(self.mlp[0].weight.device)
         
         # Convert float32 data to int64 for embedding
         if x.dtype == torch.float32:
