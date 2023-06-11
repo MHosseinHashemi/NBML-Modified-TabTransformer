@@ -1,5 +1,5 @@
 ## Attention !!
-This is a bit modified version of Tab Transformer, Checkout the "lucidrains/tab-transformer-pytorch" for the original one. This version utilizes the transformer calculation capacity even in the abscence of the categorical features.
+This is a bit modified version of Tab Transformer and it is not stable to use(Yet), Checkout the "lucidrains/tab-transformer-pytorch" for the original one. This version utilizes the transformer calculation capacity even in the abscence of the categorical features.
 
 ## The Original Tab Transformer 
  
