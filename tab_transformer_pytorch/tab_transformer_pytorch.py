@@ -199,15 +199,19 @@ class TabTransformer(nn.Module):
             xs.append(normed_cont)
 
         x = torch.cat(xs, dim = -1)
-        # To prevent error!
-#         x = x.to(self.mlp[0].weight.device)
+        # The help suggests to comment this line To prevent error! but
+        x = x.to(self.mlp[0].weight.device)
         
         # Convert float32 data to int64 for embedding
         if x.dtype == torch.float32:
             x = x.to(torch.int64)  # Convert float32 to int64
 
-        x_transformer = self.transformer(x)
-        logits = self.mlp(x_transformer)
+#         x_transformer = self.transformer(x)
+#         logits = self.mlp(x_transformer)
+        
+        # Ensuring that all of them on the same device
+        x_transformer = self.transformer(x.to(self.mlp[0].weight.device))
+        logits = self.mlp(x_transformer.to(self.mlp[0].weight.device))
 
         if not return_attn:
             return logits
