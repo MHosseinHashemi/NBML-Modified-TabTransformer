@@ -1,5 +1,5 @@
 ## Attention !!
-This is a bit modified version of Tab Transformer and it is not stable to use(Yet), Checkout the "lucidrains/tab-transformer-pytorch" for the original one. This version utilizes the transformer computational capacity even in the abscence of the categorical features.
+This is a bit modified version of Tab Transformer, Checkout the "lucidrains/tab-transformer-pytorch" for the original one. This version utilizes the transformer computational capacity even in the abscence of the categorical features. It goes without saying that all the credits goes to the original repo owner. (Phil Wang)
 
 ## The Original Tab Transformer 
  
@@ -53,6 +53,9 @@ pred = model(x_cont)
 - Removed Categorical Constraints
 - Removed  Mean-STD Normalization
 - Changed the Activation Function from ReLU to Sigmoid (Our task is binary classification)
+
+## Attention:
+- This repo is constantly updating, and it is not stable to use for any use cases yet.
 
 ## Todo
 
